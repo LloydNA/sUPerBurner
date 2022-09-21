@@ -15,6 +15,7 @@ import androidx.compose.ui.awt.ComposeWindow
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
@@ -32,10 +33,25 @@ fun App() {
     var highFuseValue = remember { mutableStateOf("") }
     var lowFuseValue = remember { mutableStateOf("") }
 
-    MaterialTheme {
+    MaterialTheme(colors = Colors(
+        Color(13, 158, 81),
+        Color(52, 209, 94),
+        Color(88, 169, 245),
+        Color(52, 133, 209),
+        Color(241, 235, 245),
+        Color(233, 230, 250),
+        Color(247, 148, 148),
+        Color(247, 245, 245),
+        Color(247, 245, 245),
+        Color(13, 12, 12),
+        Color(13, 12, 12),
+        Color(247, 245, 245),
+        true
+    )
+    ) {
         Row(Modifier.fillMaxSize(), Arrangement.SpaceEvenly, Alignment.CenterVertically) {
             Column(Modifier.wrapContentSize(),
-                Arrangement.spacedBy(50.dp)){
+                Arrangement.spacedBy(50.dp), Alignment.CenterHorizontally){
 
                 Column(Modifier.wrapContentSize(),
                 Arrangement.spacedBy(5.dp),
@@ -54,7 +70,8 @@ fun App() {
                 }
 
                 Column(Modifier.wrapContentSize(),
-                    Arrangement.spacedBy(5.dp)){
+                    Arrangement.spacedBy(5.dp),
+                    Alignment.CenterHorizontally){
                     Text(text = "write on EEPROM memory")
                     Button(onClick = {
                         eepromFilePicker.isVisible = true
@@ -73,7 +90,7 @@ fun App() {
             Arrangement.spacedBy(5.dp),
             Alignment.CenterHorizontally) {
                 Row(Modifier.wrapContentSize(),
-                Arrangement.spacedBy(2.dp)){
+                Arrangement.spacedBy(2.dp), Alignment.CenterVertically){
                     Text(text = "High Fuse")
                     TextField(
                         value = highFuseValue.value,
@@ -85,12 +102,13 @@ fun App() {
                 }
 
                 Row(Modifier.wrapContentSize(),
-                    Arrangement.spacedBy(2.dp)){
+                    Arrangement.spacedBy(2.dp),Alignment.CenterVertically){
                     Text(text = "Low Fuse")
                     TextField(
                         value = lowFuseValue.value,
                         onValueChange = {lowFuseValue.value = it},
                         modifier = Modifier.wrapContentSize()
+                            .clip(RoundedCornerShape(100.dp))
                     )
                 }
 
